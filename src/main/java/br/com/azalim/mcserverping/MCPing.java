@@ -163,7 +163,7 @@ public class MCPing {
                 jsonObject.add("description", descriptionJsonObject);
             }
         } catch(IllegalStateException e) {
-            jsonObject.add("description", GSON.toJson(new Description(jsonObject.get("description").getAsString())));
+            jsonObject.add("description", GSON.toJson(new MCPingResponse.Description(jsonObject.get("description").getAsString())));
         }
         
         MCPingResponse output = GSON.fromJson(jsonObject, MCPingResponse.class);
