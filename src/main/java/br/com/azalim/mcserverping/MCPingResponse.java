@@ -70,7 +70,6 @@ public class MCPingResponse {
 
     @Getter
     @ToString
-    @AllArgsConstructor
     public class Description {
 
         /**
