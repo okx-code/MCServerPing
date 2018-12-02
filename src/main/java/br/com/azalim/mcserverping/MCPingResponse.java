@@ -32,6 +32,7 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.AllArgsConstructor;
 
 /**
  * References: http://wiki.vg/Server_List_Ping
@@ -69,6 +70,7 @@ public class MCPingResponse {
 
     @Getter
     @ToString
+    @AllArgsConstructor
     public class Description {
 
         /**
