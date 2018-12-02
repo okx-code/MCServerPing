@@ -155,11 +155,15 @@ public class MCPing {
         }
 
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-        JsonObject descriptionJsonObject = jsonObject.get("description").getAsJsonObject();
+        try {
+            JsonObject descriptionJsonObject = jsonObject.get("description").getAsJsonObject();
 
-        if (descriptionJsonObject.has("extra")) {
-            descriptionJsonObject.addProperty("text", new TextComponent(ComponentSerializer.parse(descriptionJsonObject.get("extra").getAsJsonArray().toString())).toLegacyText());
-            jsonObject.add("description", descriptionJsonObject);
+            if (descriptionJsonObject.has("extra")) {
+                descriptionJsonObject.addProperty("text", new TextComponent(ComponentSerializer.parse(descriptionJsonObject.get("extra").getAsJsonArray().toString())).toLegacyText());
+                jsonObject.add("description", descriptionJsonObject);
+            }
+        } catch(IllegalStateException e) {
+            jsonObject.add("description", GSON.toJson(new Description(jsonObject.get("description").getAsString())));
         }
         
         MCPingResponse output = GSON.fromJson(jsonObject, MCPingResponse.class);
